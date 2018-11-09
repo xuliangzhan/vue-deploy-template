@@ -26,10 +26,10 @@ npm run build
 # 编译并生成 zip 生产包
 npm run build:zip 或者 npm run build zip=dist
 
-# 测试生产包
+# 访问生产包
 npm run start
 
-# 编译并测试生产包
+# 编译并访问生产包
 npm run build:start
 
 # 编译打包分析器报告
