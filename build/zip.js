@@ -21,7 +21,7 @@ if (zipPros.length) {
       ],
       archive: [{
         source: path.join(__dirname, '../dist'),
-        destination: path.join(__dirname, zipPros[1] ? `../${zipPros[1]}.zip` : `../${pack.name}_${pack.version}_${datetime}.zip`)
+        destination: path.join(__dirname, zipPros[1] ? `../${zipPros[1]}.zip` : `../${pack.name}_v${pack.version}_${datetime}.zip`)
       }]
     }
   }))
