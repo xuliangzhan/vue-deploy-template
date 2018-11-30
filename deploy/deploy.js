@@ -42,7 +42,7 @@ function uploadDeploy (options) {
   let websiteName = options.websiteName || pack.name
   let uploadPath = options.uploadPath.replace(/\/?$/, '')
   let websitePath = options.websitePath.replace(/\/?$/, '')
-  let datetime = XEUtils.dateToString(startTime, 'yyyyMMddHHmmss')
+  let datetime = XEUtils.toDateString(startTime, 'yyyyMMddHHmmss')
   let _saveHistory = options.isSaveHistory === true || options.isSaveHistory === '1' ? ` "call if [ ! -d ${uploadPath}/${websiteName}/history ];then mkdir ${uploadPath}/${websiteName}/history; fi" "call cp ${options.libName} ${uploadPath}/${websiteName}/history/${websiteName}_v${pack.version}_${datetime}.zip"` : ''
   let _log = ` "exit" /log=${options.log}`
   let commands = `"${options.winSCP}" /console /command "option confirm off" "open ${options.type}://${options.userName}:${encodeURIComponent(options.password)}@${options.serverAddr}:${options.serverPort}" "option transfer binary" "call if [ ! -d ${uploadPath} ];then mkdir ${uploadPath}; fi" "call if [ ! -d ${uploadPath}/${websiteName} ];then mkdir ${uploadPath}/${websiteName}; fi" "cd ${uploadPath}/${websiteName}" "put ${options.libPath}${options.libName}" "call if [ ! -d ${websitePath} ];then mkdir ${websitePath}; fi" "call rm -rf ${websitePath}/${websiteName}" "call unzip ${options.libName} -d ${websitePath}/${websiteName}"${_saveHistory}${_log}`
