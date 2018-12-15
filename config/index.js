@@ -4,22 +4,14 @@
 
 const path = require('path')
 
-function onProxyRes(proxyRes, req, res) {
-  let cookies = proxyRes.headers['set-cookie']
-  if (cookies) {
-    let newCookie = cookies.map(cookie => cookie.replace(/;\s.+/, ' ; Path=/'));
-    delete proxyRes.headers['set-cookie'];
-    proxyRes.headers['set-cookie'] = newCookie;
-  }
-}
-
-function getProxyConfig(target, options) {
+function getProxyConfig (target, options) {
   return Object.assign({
     target,
     secure: false,
     changeOrigin: true,
     ws: false,
-    onProxyRes
+    cookieDomainRewrite: {'*': ''},
+    cookiePathRewrite: {'*': '/'}
   }, options)
 }
 
