@@ -4,6 +4,20 @@
 
 const path = require('path')
 
+function proxyHandle (proxyReq, req, res, options) {
+  let origin = `${options.target.protocol}//${options.target.host}`
+  proxyReq.setHeader('origin', origin)
+  proxyReq.setHeader('referer', origin)
+}
+
+function onProxyReq (proxyReq, req, res, options) {
+  proxyHandle(proxyReq, req, res, options)
+}
+
+function onProxyReqWs (proxyReq, req, socket, options, head) {
+  proxyHandle(proxyReq, req, socket, options)
+}
+
 function getProxyConfig (target, options) {
   return Object.assign({
     target,
@@ -11,7 +25,9 @@ function getProxyConfig (target, options) {
     changeOrigin: true,
     ws: false,
     cookieDomainRewrite: {'*': ''},
-    cookiePathRewrite: {'*': '/'}
+    cookiePathRewrite: {'*': '/'},
+    onProxyReq,
+    onProxyReqWs
   }, options)
 }
 
