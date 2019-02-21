@@ -70,7 +70,7 @@ module.exports = new Promise((resolve, reject) => {
       let host = ['localhost', '127.0.0.1', '0.0.0.0'].includes(devWebpackConfig.devServer.host) ? 'localhost' : devWebpackConfig.devServer.host
       devWebpackConfig.plugins.push(new FriendlyErrorsPlugin({
         compilationSuccessInfo: {
-          messages: [`Your application is running here: http://${host}:${port}${config.dev.assetsPublicPath}`],
+          messages: [`Your application is running here: http://${host}:${port}${config.dev.assetsPublicPath}`]
         },
         onErrors: config.dev.notifyOnErrors
           ? utils.createNotifierCallback()
