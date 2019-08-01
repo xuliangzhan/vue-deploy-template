@@ -2,11 +2,6 @@
 
  [查看博客](https://blog.csdn.net/xlz26296/article/details/83505678)
 
- 1. 支持生成 zip 包
- 2. 简化代理配置
- 3. 支持本地测试访问生产包
- 4. 基于 WinSCP 脚本支持一键部署
-
 ``` bash
 # 切换为官网：
 npm config set registry https://registry.npmjs.org
