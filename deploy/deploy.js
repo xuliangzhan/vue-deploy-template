@@ -59,7 +59,7 @@ function uploadDeploy (options) {
       fs.unlinkSync(options.log)
     }
   } catch (e) {}
-  for (let key of ['type', 'userName', 'password', 'serverAddr', 'serverPort', 'uploadPath', 'websitePath']) {
+  for (let key of ['userName', 'password', 'serverAddr', 'serverPort', 'uploadPath', 'websitePath']) {
     if (!options[key]) {
       throw new Error(`The ${key} cannot be empty. type=${options[key]}`)
     }
