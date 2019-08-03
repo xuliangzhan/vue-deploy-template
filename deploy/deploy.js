@@ -54,11 +54,6 @@ function uploadDeploy (options) {
     spinner.text = `[${progressNum}%] ${progressText} ...\n`
   }, 1000)
   spinner.start()
-  try {
-    if (options.log) {
-      fs.unlinkSync(options.log)
-    }
-  } catch (e) {}
   for (let key of ['userName', 'password', 'serverAddr', 'serverPort', 'uploadPath', 'websitePath']) {
     if (!options[key]) {
       throw new Error(`The ${key} cannot be empty. type=${options[key]}`)
