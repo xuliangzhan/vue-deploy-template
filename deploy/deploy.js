@@ -1,4 +1,3 @@
-const fs = require('fs')
 const path = require('path')
 const pack = require('../package.json')
 const XEUtils = require('xe-utils')
@@ -27,7 +26,6 @@ function getCommandParams (key, name) {
 
 /**
  * 前端工程一键部署
- * 使用 WinSCP 工具
  *
  * 命令：npm run deploy u=root p=123456
  * 命令：npm run deploy
@@ -35,8 +33,8 @@ function getCommandParams (key, name) {
 let defOpts = {
   serverAddr: '127.0.0.1', // 服务器IP
   serverPort: '22', // ftp、sftp端口
-  // userName: null, // 服务器用户名
-  // password: null, // 服务器密码
+  userName: 'root', // 服务器用户名
+  password: '123456', // 服务器密码
   uploadPath: `/home/upload`, // 包发布历史存放目录
   libName: `dist.zip`, // 包名
   websitePath: `/home/website/${pack.name}/www`, // 项目部署站点路径
@@ -118,11 +116,13 @@ function uploadDeploy (options) {
       progressNum = Math.max(progressNum, 100)
       ssh.dispose()
       setTimeout(() => {
-        console.log(chalk`\n{bold.${color} Project Name:} ${websiteName}\n{bold.${color} Version:} ${pack.version}\n{bold.${color} Server:} ${options.type}://${options.serverAddr}:${options.serverPort}\n{bold.${color} Lib Path:} ${uploadPath}/${websiteName}/${libName}\n{bold.${color} Project Path:} ${websitePath}/${websiteName}\n{bold.${color} Datetime:} ${datetime}\n{bold.${color} Deploy Time:} ${deployTime}\n`)
+        console.log(chalk`\n{bold.${color} Project Name:} ${websiteName}\n{bold.${color} Version:} ${pack.version}\n{bold.${color} Server:} ${options.serverAddr}:${options.serverPort}\n{bold.${color} Lib Path:} ${uploadPath}/${websiteName}/${libName}\n{bold.${color} Project Path:} ${websitePath}/${websiteName}\n{bold.${color} Datetime:} ${datetime}\n{bold.${color} Deploy Time:} ${deployTime}\n`)
+        console.log(chalk.cyan(`Deployment success.\n\n`))
         spinner.stop()
         clearInterval(spInterval)
       }, 1000)
     }).catch(e => {
+      console.log(chalk.red(`\n\nDeployment error.\n`))
       ssh.dispose()
       spinner.stop()
       clearInterval(spInterval)
