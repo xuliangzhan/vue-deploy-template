@@ -2,9 +2,7 @@ import '@/assets/style/layout.scss'
 
 import Vue from 'vue'
 import XEUtils from 'xe-utils'
-import VXEUtils from 'vxe-utils'
 
-import utils from '@/common/utils'
 import router from '@/router'
 import store from '@/store'
 import App from '@/App'
@@ -16,6 +14,8 @@ import PageHeader from '@/views/layout/Header.vue'
 import PageMain from '@/views/layout/Main.vue'
 import PageFooter from '@/views/layout/Footer.vue'
 
+import './plugins/utils'
+
 // Component
 Vue.component(PageColumn.name, PageColumn)
 Vue.component(PageRow.name, PageRow)
@@ -24,16 +24,6 @@ Vue.component(PageHeader.name, PageHeader)
 Vue.component(PageMain.name, PageMain)
 Vue.component(PageFooter.name, PageFooter)
 
-// Plugins
-Vue.use(VXEUtils, XEUtils, { mounts: ['cookie'] })
-
-// Config
-XEUtils.mixin(utils)
-XEUtils.setup({
-  cookies: {
-    path: '/'
-  }
-})
 Vue.config.productionTip = false
 
 // Router
